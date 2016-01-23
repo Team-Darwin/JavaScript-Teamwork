@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Snake!</title>
-</head>
-<body>
-    <canvas id="canvas" width="400" height="400"></canvas>
-
-    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
-
-    <script>
     // Set up canvas
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
@@ -45,7 +34,6 @@
       ctx.fillRect(x, y, blockSize, blockSize);
     };
 
-    
     // The Snake constructor
     var Snake = function () {
       this.segments = [
@@ -83,12 +71,9 @@
         newHead = new Block(head.col, head.row - 1);
       }
 
-
       this.segments.unshift(newHead);
 
     };
-
-   
 
     // Set the snake's next direction based on the keyboard
     Snake.prototype.setDirection = function (newDirection) {
@@ -133,6 +118,3 @@
         snake.setDirection(newDirection);
       }
     });
-    </script>
-</body>
-</html>
