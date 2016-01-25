@@ -13,7 +13,7 @@ var blockSize = 10;
 
 // Draw the border
 var drawBorder = function () {
-    ctx.fillStyle = "Gray";
+    ctx.fillStyle = "Black";
     ctx.fillRect(0, 0, width, blockSize);
     ctx.fillRect(0, height - blockSize, width, blockSize);
     ctx.fillRect(0, 0, blockSize, height);
@@ -35,13 +35,13 @@ Block.prototype.drawSquare = function (color) {
 };
 
 var Food = function() {
-    this.x = Math.round((Math.random() * 30) + 1); // could improve the random algorithm
-    this.y = Math.round((Math.random() * 30) + 1);
+    this.x = Math.floor((Math.random() * 30) + 1); // could improve the random algorithm
+    this.y = Math.floor((Math.random() * 30) + 1);
     this.food = new Block(this.x, this.y);
 };
 
 Food.prototype.draw = function() {
-    this.food.drawSquare("Blue");
+    this.food.drawSquare("Red");
 };
 
 // The Snake constructor
