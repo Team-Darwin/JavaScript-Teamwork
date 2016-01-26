@@ -35,9 +35,9 @@ Block.prototype.drawSquare = function (color) {
 };
 
 var Food = function() {
-    this.x = Math.floor((Math.random() * 30) + 1); // could improve the random algorithm
-    this.y = Math.floor((Math.random() * 30) + 1);
-    this.food = new Block(this.x, this.y);
+    this.col = Math.floor((Math.random() * 30) + 1); // could improve the random algorithm
+    this.row = Math.floor((Math.random() * 30) + 1);
+    this.food = new Block(this.col, this.row);
 };
 
 Food.prototype.draw = function() {
@@ -85,6 +85,11 @@ Snake.prototype.move = function () {
     if(newHead.col === -1 || newHead.col === width / blockSize || newHead.row === -1 || newHead.row === height / blockSize) {
         console.log('Hit a wall!');
         //TODO: Add game over clause
+    }
+
+    if(newHead.col === food.col && newHead.row === food.row) {
+        console.log('eat');
+        this.segments.push(new Block(newHead.col, newHead.row));
     }
 
     this.segments.unshift(newHead);
