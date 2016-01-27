@@ -31,7 +31,7 @@ Block.prototype.drawSquare = function (color) {
 // Draw the score in the top-left corner
 var drawScore = function () {
     ctx.font = "10px Courier";
-    ctx.fillStyle = "Black";
+    ctx.fillStyle = "Green";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     ctx.fillText("Score: " + score, blockSize, blockSize);
@@ -181,6 +181,7 @@ var init = setInterval(function() {
         ctx.clearRect(0, 0, width, height);
         ctx.font = "20px Arial";
         ctx.fillText('Score: ' + score, 5, height - 5);
+        drawScore();
         snake.move();
         snake.draw();
 },100);
