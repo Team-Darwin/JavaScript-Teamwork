@@ -9,8 +9,9 @@ var score = 0;
 
 // Work out the width and height in blocks
 var blockSize = 10;
-//var widthInBlocks = width / blockSize;
-//var heightInBlocks = height / blockSize;
+
+// Score count
+var score = 0;
 
 
 // The Block constructor
@@ -25,6 +26,15 @@ Block.prototype.drawSquare = function (color) {
     var y = this.row * blockSize;
     ctx.fillStyle = color;
     ctx.fillRect(x, y, blockSize, blockSize);
+};
+
+// Draw the score in the top-left corner
+var drawScore = function () {
+    ctx.font = "10px Courier";
+    ctx.fillStyle = "Black";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText("Score: " + score, blockSize, blockSize);
 };
 
 var Food = function() {
