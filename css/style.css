@@ -28,12 +28,12 @@ canvas {
 
 #noty {
     position: absolute;
-    width: 410px;
+    width: 560px;
     left: 290px;
 }
 
 #noty li {
-    height: 410px;
+    height: 560px;
     border: 0;
 }
 
@@ -48,7 +48,7 @@ canvas {
 
 #noty_top_layout_container {
     left: 770px !important;
-    width: 400px !important;
+    width: 560px !important;
 }
 
 .noty_text {
