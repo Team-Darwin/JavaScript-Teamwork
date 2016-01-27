@@ -95,7 +95,23 @@ Snake.prototype.move = function () {
     // Check if there is a wall hit
     if(newHead.col === -1 || newHead.col === width / blockSize || newHead.row === -1 || newHead.row === height / blockSize) {
         console.log('Hit a wall!');
-        //TODO: Add game over clause
+        var n = $('#noty').noty({
+            text: 'Ooops! It looks like you hit a wall!',
+            //layout: 'center',
+            closeWith: ['click'],
+            type: 'alert',
+            buttons: [
+                {addClass: 'btn btn-primary', text: 'New Game', onClick: function($noty) {
+                    $noty.close();
+
+                }},
+                {addClass: 'btn btn-danger', text: 'Cancel', onClick: function($noty) {
+                        noty({text: 'THANKS FOR PLAYING!', type: 'information'});
+                        $noty.close();
+                    }
+                }
+            ]
+        });
     }
 
     food.draw();
@@ -181,3 +197,4 @@ $("body").keydown(function (event) {
         snake.setDirection(newDirection);
     }
 });
+

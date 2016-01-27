@@ -1,0 +1,61 @@
+body {
+    background: antiquewhite;
+    font-family: 'Ubuntu';
+}
+
+#wrapper {
+    width: 960px;
+    margin: 50px auto;
+    position: relative;
+    background: red;
+}
+
+canvas {
+    position:absolute;
+    left: 290px;
+}
+
+#overlay {
+    position: absolute;
+    left: 290px;
+    width: 400px;
+    height: 400px;
+    background: black;
+    opacity: 0.5;
+}
+
+#noty {
+    position: absolute;
+    width: 400px;
+    left: 290px;
+}
+
+#noty li {
+    height: 400px;
+    border: 0;
+}
+
+#noty .noty_buttons {
+    text-align: center !important;
+}
+
+#noty button {
+    margin-top: 40%;
+    font-size: 20px;
+}
+
+#noty_top_layout_container {
+    left: 770px !important;
+    width: 400px !important;
+}
+
+.noty_text {
+    font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: tomato;
+    margin: 30px;
+    font-size: 40px;
+}

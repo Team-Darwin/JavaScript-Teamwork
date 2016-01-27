@@ -2,10 +2,18 @@
 <html>
 <head>
     <title>Snake!</title>
-    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="libs/jquery/dist/jquery.js"></script>
+    <script src="libs/noty/packaged/jquery.noty.packaged.min.js"></script>
 </head>
 <body>
-    <canvas id="canvas" width="400" height="400"></canvas>
-    <script src="js/snake.js"></script>
+    <div id="wrapper">
+        <canvas id="canvas" width="400" height="400">
+            Sorry, your browser does not support canvas!
+        </canvas>
+        <div id="noty"></div>
+    </div>
+   <script src="js/snake.js"></script>
 </body>
 </html>
