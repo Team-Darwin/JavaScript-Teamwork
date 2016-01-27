@@ -5,6 +5,7 @@ var ctx = canvas.getContext("2d");
 // Get the width and height from the canvas element
 var width = canvas.width;
 var height = canvas.height;
+var score = 0;
 
 // Work out the width and height in blocks
 var blockSize = 10;
@@ -84,7 +85,6 @@ Snake.prototype.move = function () {
         newHead = new Block(head.col, head.row - 1);
     }
 
-        console.log(newHead);
     // Check if there is a wall hit
     if(newHead.col === -1 || newHead.col === width / blockSize || newHead.row === -1 || newHead.row === height / blockSize) {
         clearInterval(init);
@@ -98,7 +98,6 @@ Snake.prototype.move = function () {
             buttons: [
                 {addClass: 'btn btn-primary', text: 'New Game', onClick: function($noty) {
                     $noty.close();
-                    ctx.clearRect(5, 5, width, height);
 
                 }},
                 {addClass: 'btn btn-danger', text: 'Cancel', onClick: function($noty) {
@@ -115,6 +114,7 @@ Snake.prototype.move = function () {
     if(newHead.col === food.food.col && newHead.row === food.food.row) {
         console.log('eat');
         this.segments.push(new Block(newHead.col, newHead.row));
+        score++;
         food.updatePosition();
     }
 
@@ -169,6 +169,8 @@ var food  = new Food();
 // Pass an animation function to setInterval
 var init = setInterval(function() {
         ctx.clearRect(0, 0, width, height);
+        ctx.font = "20px Arial";
+        ctx.fillText('Score: ' + score, 5, height - 5);
         snake.move();
         snake.draw();
 },100);
