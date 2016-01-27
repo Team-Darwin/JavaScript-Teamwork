@@ -11,14 +11,6 @@ var blockSize = 10;
 //var widthInBlocks = width / blockSize;
 //var heightInBlocks = height / blockSize;
 
-// Draw the border
-var drawBorder = function () {
-    ctx.fillStyle = "Black";
-    ctx.fillRect(0, 0, width, blockSize);
-    ctx.fillRect(0, height - blockSize, width, blockSize);
-    ctx.fillRect(0, 0, blockSize, height);
-    ctx.fillRect(width - blockSize, 0, blockSize, height);
-};
 
 // The Block constructor
 var Block = function (col, row) {
@@ -92,9 +84,12 @@ Snake.prototype.move = function () {
         newHead = new Block(head.col, head.row - 1);
     }
 
+        console.log(newHead);
     // Check if there is a wall hit
     if(newHead.col === -1 || newHead.col === width / blockSize || newHead.row === -1 || newHead.row === height / blockSize) {
+        clearInterval(init);
         console.log('Hit a wall!');
+
         var n = $('#noty').noty({
             text: 'Ooops! It looks like you hit a wall!',
             //layout: 'center',
@@ -103,6 +98,7 @@ Snake.prototype.move = function () {
             buttons: [
                 {addClass: 'btn btn-primary', text: 'New Game', onClick: function($noty) {
                     $noty.close();
+                    ctx.clearRect(5, 5, width, height);
 
                 }},
                 {addClass: 'btn btn-danger', text: 'Cancel', onClick: function($noty) {
@@ -171,16 +167,12 @@ var food  = new Food();
 
 
 // Pass an animation function to setInterval
-var init = function () {
-    setInterval(function() {
+var init = setInterval(function() {
         ctx.clearRect(0, 0, width, height);
         snake.move();
         snake.draw();
-        drawBorder();
-    },100);
-};
+},100);
 
-init();
 
 // Convert keycodes to directions
 var directions = {
