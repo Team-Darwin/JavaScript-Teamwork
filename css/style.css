@@ -12,7 +12,9 @@ body {
 
 canvas {
     position:absolute;
+    border: 5px solid black;
     left: 290px;
+    background: aliceblue;
 }
 
 #overlay {
@@ -26,12 +28,12 @@ canvas {
 
 #noty {
     position: absolute;
-    width: 400px;
+    width: 410px;
     left: 290px;
 }
 
 #noty li {
-    height: 400px;
+    height: 410px;
     border: 0;
 }
 
