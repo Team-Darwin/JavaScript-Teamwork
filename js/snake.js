@@ -35,13 +35,24 @@ Block.prototype.drawSquare = function (color) {
 };
 
 var Food = function() {
-    this.col = Math.floor((Math.random() * 30) + 1); // could improve the random algorithm
-    this.row = Math.floor((Math.random() * 30) + 1);
+    this.col = createRandomCoordinates(); // could improve the random algorithm
+    this.row = createRandomCoordinates();
     this.food = new Block(this.col, this.row);
 };
 
 Food.prototype.draw = function() {
     this.food.drawSquare("Red");
+};
+
+Food.prototype.updatePosition = function(){
+    this.food.row = createRandomCoordinates();
+    this.food.col = createRandomCoordinates();
+};
+
+function createRandomCoordinates() {
+    var number = Math.floor((Math.random() * 30) + 1);
+
+    return number;
 };
 
 // The Snake constructor
@@ -87,9 +98,12 @@ Snake.prototype.move = function () {
         //TODO: Add game over clause
     }
 
-    if(newHead.col === food.col && newHead.row === food.row) {
+    food.draw();
+
+    if(newHead.col === food.food.col && newHead.row === food.food.row) {
         console.log('eat');
         this.segments.push(new Block(newHead.col, newHead.row));
+        food.updatePosition();
     }
 
     this.segments.unshift(newHead);
@@ -146,9 +160,8 @@ var init = function () {
         ctx.clearRect(0, 0, width, height);
         snake.move();
         snake.draw();
-        food.draw();
         drawBorder();
-    },80);
+    },100);
 };
 
 init();
