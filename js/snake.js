@@ -30,7 +30,7 @@ Block.prototype.drawSquare = function (color) {
 
 // Draw the score in the top-left corner
 var drawScore = function () {
-    ctx.font = "10px Courier";
+    ctx.font = "15px Courier";
     ctx.fillStyle = "Green";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
