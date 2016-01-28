@@ -1,17 +1,9 @@
-// Set up canvas
 var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-
-// Get the width and height from the canvas element
-var width = canvas.width;
-var height = canvas.height;
-var score = 0;
-
-// Work out the width and height in blocks
-var blockSize = 10;
-
-// Score count
-var score = 0;
+    ctx = canvas.getContext("2d");
+    width = canvas.width;
+    height = canvas.height;
+    score = 0;
+    blockSize = 10;
 
 
 // The Block constructor
@@ -30,7 +22,7 @@ Block.prototype.drawSquare = function (color) {
 
 // Draw the score in the top-left corner
 var drawScore = function () {
-    ctx.font = "10px Courier";
+    ctx.font = "15px Courier";
     ctx.fillStyle = "Green";
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
@@ -38,7 +30,7 @@ var drawScore = function () {
 };
 
 var Food = function() {
-    this.col = createRandomCoordinates(); // could improve the random algorithm
+    this.col = createRandomCoordinates();
     this.row = createRandomCoordinates();
     this.food = new Block(this.col, this.row);
 };
@@ -77,7 +69,7 @@ Snake.prototype.draw = function () {
     }
 };
 
-// Create a new head and add it to the beginning of
+// Create a new head and add it to the bginning of
 // the snake to move the snake in its current direction
 Snake.prototype.move = function () {
     var head = this.segments[0];
@@ -95,19 +87,20 @@ Snake.prototype.move = function () {
         newHead = new Block(head.col, head.row - 1);
     }
 
+    food.draw();
+
     // Check if there is a wall hit
     if(newHead.col === -1 || newHead.col === width / blockSize || newHead.row === -1 || newHead.row === height / blockSize) {
         clearInterval(init);
         console.log('Hit a wall!');
-
         var n = $('#noty').noty({
             text: 'Ooops! It looks like you hit a wall!',
             //layout: 'center',
             closeWith: ['click'],
             type: 'alert',
             buttons: [
-                {addClass: 'btn btn-primary', text: 'New Game', onClick: function($noty) {
-                    $noty.close();
+                {addClass: 'btn btn-primary btn-disabled', text: 'New Game', onClick: function($noty) {
+                    noty({text: 'The server is busy! You should wait 5 min for a new slot', type: 'warning'});
 
                 }},
                 {addClass: 'btn btn-danger', text: 'Cancel', onClick: function($noty) {
@@ -119,12 +112,13 @@ Snake.prototype.move = function () {
         });
     }
 
-    food.draw();
-
     if(newHead.col === food.food.col && newHead.row === food.food.row) {
         console.log('eat');
         this.segments.push(new Block(newHead.col, newHead.row));
         score++;
+        if(score == 10) {
+            noty({text: 'Well done!', type: 'success'});
+        }
         food.updatePosition();
     }
 
@@ -135,25 +129,6 @@ Snake.prototype.move = function () {
 
 };
 
-// Check if the snake's new head has collided with the wall or itself
-Snake.prototype.checkCollision = function (head) {
-    var leftCollision = (head.col === 0);
-    var topCollision = (head.row === 0);
-    var rightCollision = (head.col === widthInBlocks - 1);
-    var bottomCollision = (head.row === heightInBlocks - 1);
-
-    var wallCollision = leftCollision || topCollision || rightCollision || bottomCollision;
-
-    var selfCollision = false;
-
-    for (var i = 0; i < this.segments.length; i++) {
-        if (head.equal(this.segments[i])) {
-            selfCollision = true;
-        }
-    }
-
-    return wallCollision || selfCollision;
-};
 
 // Set the snake's next direction based on the keyboard
 Snake.prototype.setDirection = function (newDirection) {
@@ -170,21 +145,16 @@ Snake.prototype.setDirection = function (newDirection) {
     this.nextDirection = newDirection;
 };
 
-
-// Create the snake object
 var snake = new Snake();
 var food  = new Food();
-
 
 // Pass an animation function to setInterval
 var init = setInterval(function() {
         ctx.clearRect(0, 0, width, height);
-        ctx.font = "20px Arial";
-        ctx.fillText('Score: ' + score, 5, height - 5);
         drawScore();
         snake.move();
         snake.draw();
-},100);
+},80);
 
 
 // Convert keycodes to directions
@@ -202,4 +172,5 @@ $("body").keydown(function (event) {
         snake.setDirection(newDirection);
     }
 });
+
 

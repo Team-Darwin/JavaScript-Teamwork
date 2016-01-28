@@ -35,6 +35,7 @@ canvas {
 #noty li {
     height: 560px;
     border: 0;
+    border-radius: 0 !important;
 }
 
 #noty .noty_buttons {
